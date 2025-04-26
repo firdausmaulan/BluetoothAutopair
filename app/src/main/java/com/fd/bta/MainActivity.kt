@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isBluetoothEnable(): Boolean {
-        if (permissionHelper.isPermissionBluetoothGranted(this)) {
+        if (permissionHelper.isBluetoothPermissionGranted(this)) {
             return getBluetoothAdapter()?.isEnabled == true
         }
         return false

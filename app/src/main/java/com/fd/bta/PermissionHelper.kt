@@ -8,13 +8,13 @@ import androidx.core.app.ActivityCompat
 
 class PermissionHelper {
 
-    fun isPermissionBluetoothGranted(activity: Activity): Boolean {
+    fun isBluetoothPermissionGranted(activity: Activity): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val isBluetoothScanGranted = isGranted(activity, Manifest.permission.BLUETOOTH_SCAN)
             val isBluetoothConnectGranted = isGranted(activity, Manifest.permission.BLUETOOTH_CONNECT)
             val isFineLocationGranted = isGranted(activity, Manifest.permission.ACCESS_FINE_LOCATION)
-            val granted = isBluetoothScanGranted && isBluetoothConnectGranted && isFineLocationGranted
-            if (!granted) {
+            val allGranted = isBluetoothScanGranted && isBluetoothConnectGranted && isFineLocationGranted
+            if (!allGranted) {
                 ActivityCompat.requestPermissions(
                     activity,
                     arrayOf(
@@ -25,12 +25,12 @@ class PermissionHelper {
                     1
                 )
             }
-            granted
+            allGranted
         } else {
             val isBluetoothGranted = isGranted(activity, Manifest.permission.BLUETOOTH)
             val isFineLocationGranted = isGranted(activity, Manifest.permission.ACCESS_FINE_LOCATION)
-            val granted = isBluetoothGranted && isFineLocationGranted
-            if (!granted) {
+            val allGranted = isBluetoothGranted && isFineLocationGranted
+            if (!allGranted) {
                 ActivityCompat.requestPermissions(
                     activity,
                     arrayOf(
@@ -40,7 +40,7 @@ class PermissionHelper {
                     1
                 )
             }
-            granted
+            allGranted
         }
     }
 
